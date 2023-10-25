@@ -11,3 +11,10 @@ Make file contains commands needed.
 * `make test-acceptance` Runs acceptance tests
 
 * `make run` Runs the program
+
+
+team12 was here
+
+echo "Matt & David were here" >> README.md
+Suresh was here 
+Suresh is here againHussain Fadwani was here
