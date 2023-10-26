@@ -6,3 +6,14 @@ class TestCharacterInitWithName(TestCase):
         ARBITRARY_NAME = "MyName"
         testobj = Character(ARBITRARY_NAME)
         self.assertEqual(ARBITRARY_NAME, testobj.name)
+
+    def TestCharacterInitWithPosition(TestCase):
+        ARBITRARY_NAME = "MyName"
+        testobj = Character(ARBITRARY_NAME)
+        testobj.setPosition(current_position)
+        compare_position = Position(2,3)
+        self.assertEqual(compare_position, testobj1.position)
+
+
+
+
