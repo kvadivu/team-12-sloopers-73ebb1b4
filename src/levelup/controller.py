@@ -1,6 +1,7 @@
 import logging
 from dataclasses import dataclass
 from enum import Enum
+from levelup.character import Character
 
 
 DEFAULT_CHARACTER_NAME = "Character"
@@ -30,6 +31,7 @@ class GameController:
 
 
     status: GameStatus
+    character: Character
 
     def __init__(self):
         self.status = GameStatus()
@@ -38,29 +40,33 @@ class GameController:
         pass
 
     # Pre-implemented to demonstrate ATDD
-    # TODO: Update this if it does not match your design (hint - it doesnt)
     def create_character(self, character_name: str) -> None:
-        if character_name is not None and character_name != "":
-            self.status.character_name = character_name
-        else:
+        if character_name is None or character_name == "":
             self.status.character_name = DEFAULT_CHARACTER_NAME
+        else:
+            self.status.character_name = character_name
+        self.status.character_name = self.character.character_name
 
     def move(self, direction: Direction) -> None:
-        # TODO: Implement move - should call something on another class
-        # TODO: Should probably also update the game results
-        pass
-
+        self.character.move(direction)
+        self.status.current_position = (self.character.current_position.x, self.character.current_position.y)
+        self.status.move_count = self.status.move_count + 1
+        status.movecount
+   
     def set_character_position(self, xycoordinates: tuple) -> None:
-        # TODO: IMPLEMENT THIS TO SET CHARACTERS CURRENT POSITION -- exists to be testable
-        pass
+        x = xycoordinates[0]
+        y = xycoordinates[1]
+        self.character.current_position = Position(x,y)
+        self.status.current_position = xycoordinates
 
     def set_current_move_count(self, move_count: int) -> None:
-        # TODO: IMPLEMENT THIS TO SET CURRENT MOVE COUNT -- exists to be testable
-        pass
-
+        # IMPLEMENT THIS TO SET CURRENT MOVE COUNT -- exists to be testable
+        self.status.move_count = move_count
+        
     def get_total_positions(self) -> int:
-        # TODO: IMPLEMENT THIS TO GET THE TOTAL POSITIONS FROM THE MAP - - exists to be
+        # IMPLEMENT THIS TO GET THE TOTAL POSITIONS FROM THE MAP - - exists to be
         # testable
-        return -10
+        return self.character.gamemap.getTotalPositions()
+        
 
     
