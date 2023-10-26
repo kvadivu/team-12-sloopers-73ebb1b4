@@ -1,3 +1,4 @@
+class Character:
 
     name = ""
     position=0
