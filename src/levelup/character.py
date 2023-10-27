@@ -1,8 +1,14 @@
+
+
+from levelup.gamemap import GameMap
+from levelup.direction import Direction
+from levelup.position import Position
 class Character:
 
+
     name = ""
-    position=0
-    gamemap=""
+    current_position :Position = Position(0,0)
+    gamemap :GameMap = GameMap()
 
     def __init__(self, character_name):
         self.name = character_name
@@ -19,7 +25,7 @@ class Character:
     def enterMap(self, gamemap):
         self.gamemap = gamemap
 
-    def move(self, direction):
-        self.gamemap.calculatePosition(position, direction)
+    def move(self, direction :Direction) -> None:
+        self.current_position=self.gamemap.calculate_new_position(self.current_position, direction)
     
-    
+  
