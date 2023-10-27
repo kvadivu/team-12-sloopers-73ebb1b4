@@ -1,13 +1,49 @@
+from levelup.position import Position
+from levelup.direction import Direction
+from typing import Tuple
 class GameMap:
-    numpositions = 0
+    starting_position = Position(0,0)
+    positions = []
+    size: Tuple[int, int] = (10, 10)
 
-    def __init__(self, anumpositions):
-        self.numpositions = anumpositions
+    def __init__(self):
+        self.create_positions()
 
-    def getNumPositions(self):
-        return self.numpositions
+    def create_positions(self) -> None:
+        temp_pos = []
+        for x in range(self.size[0]):
+            y_range = []
+            for y in range(self.size[1]):
+                new_pos = Position(x,y)
+                y_range.append(new_pos)
+            temp_pos.append(y_range)
+        self.positions = temp_pos
 
-    def setNumPositions(self, anumpositions):
-        self.numpositions = anumpositions
 
+    def is_position_valid(self, position :Position):
+        if position.x >= 0 and position.x < self.size[0] and position.y >= 0 and position.y < self.size[1]:
+            return True
+        else:
+            return False
 
+    def calculate_new_position(self, current_position: Position, direction: Direction) -> Position:
+        new_position = current_position
+       
+        if direction == Direction.NORTH:
+            new_position = Position(current_position.x, current_position.y + 1)
+            print ("new position.y" + str(new_position.y))
+        elif direction == Direction.SOUTH:
+            new_position = Position(current_position.x, current_position.y - 1)
+        elif direction == Direction.EAST:
+            new_position = Position(current_position.x + 1, current_position.y)
+        elif direction == Direction.WEST:
+            new_position = Position(current_position.x - 1, current_position.y)
+        else:
+            pass
+        
+        if self.is_position_valid(new_position) == True:
+            print ("new position.y" + str(new_position.y))
+            return new_position
+            
+        else:
+            return current_position
